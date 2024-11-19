@@ -6,7 +6,7 @@ from speed_selection_screen import speed_selection_screen
 from game_loop import game_loop
 
 # Inițializăm vitezele în main.py
-player_speed = 1
+player_speed = 50
 bot_speed = 30
 
 # Rularea jocului

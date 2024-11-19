@@ -4,6 +4,14 @@ import pygame
 import random
 from config import *
 
+def draw_gradient_background(surface, color1, color2, width, height):
+    """Desenează un gradient de la color1 la color2 pe întreaga fereastră."""
+    for y in range(height):
+        r = color1[0] + (color2[0] - color1[0]) * y // height
+        g = color1[1] + (color2[1] - color1[1]) * y // height
+        b = color1[2] + (color2[2] - color1[2]) * y // height
+        pygame.draw.line(surface, (r, g, b), (0, y), (width, y))
+
 def scale_speed(speed):
     return (speed / 100) * 7  # Viteza maximă va fi 7, minimă 0
 
@@ -92,9 +100,13 @@ def game_loop(player_speed, bot_speed):
         if bot_direction_cooldown > 0:
             bot_direction_cooldown -= 1
 
-        window.fill(WHITE)
+        # Fundal cu gradient gri
+        draw_gradient_background(window, (200, 200, 200), (100, 100, 100), width, height)
+
+        # Desenăm circuitul
         pygame.draw.rect(window, BLACK, track_rect, 5) 
 
+        # Desenăm mașini
         window.blit(car_image, (car_x, car_y))  
         window.blit(bot_image, (bot_x, bot_y)) 
 
